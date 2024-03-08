@@ -8,13 +8,16 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
+  id       String    @id @default(cuid())
+  email    String    @unique
   password String
+  Contact  Contact[]
 }
 
 model Contact {
   id          String @id @default(cuid())
   name        String
   phoneNumber String @unique @map("phone_number")
+  uid         String
+  user        User   @relation(fields: [uid], references: [id], onDelete: Cascade)
 }
