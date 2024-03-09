@@ -1,6 +1,6 @@
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
-import Label from "@/components/label";
+import { Label } from "@/components/label";
 
 export default function Page() {
   return (
