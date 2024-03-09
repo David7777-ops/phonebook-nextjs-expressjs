@@ -4,7 +4,10 @@ import { validate } from "../../middlewares/zod";
 import { ICreateContact, IUpdateContact } from "../../dto/contacts.dto";
 import { IGetUserAuthInfoRequest, authorization } from "../../middlewares/auth";
 import errorHandler from "../../middlewares/errors";
+import { Post, Get, Put, Delete, Route, Tags } from "tsoa";
 
+@Route("/contacts")
+@Tags("Contacts")
 class ContactsController {
   public routerHandler;
   private service = new ContactsServie();
@@ -17,6 +20,7 @@ class ContactsController {
     this.delete();
   }
 
+  @Delete("/:id")
   async delete() {
     this.routerHandler.delete(
       "/contacts/:id",
@@ -43,6 +47,7 @@ class ContactsController {
     );
   }
 
+  @Put("/:id")
   async update() {
     this.routerHandler.put(
       "/contacts/:id",
@@ -72,6 +77,7 @@ class ContactsController {
     );
   }
 
+  @Get("/:id")
   async findOne() {
     this.routerHandler.get(
       "/contacts/:id",
@@ -98,6 +104,7 @@ class ContactsController {
     );
   }
 
+  @Get("/")
   async findMany() {
     this.routerHandler.get(
       "/contacts",
@@ -131,6 +138,8 @@ class ContactsController {
       errorHandler
     );
   }
+
+  @Post("/")
   async create() {
     this.routerHandler.post(
       "/contacts",

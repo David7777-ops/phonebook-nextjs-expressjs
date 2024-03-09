@@ -6,6 +6,8 @@ import listEndpoints from "express-list-endpoints";
 import { Server } from "http";
 import routes from "../routes";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../../public/swagger.json";
 
 function initExpress(): Server {
   const app = express();
@@ -27,6 +29,9 @@ function initExpress(): Server {
 
   // Router V1
   app.use(routes);
+
+  // Swagger Docs
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   console.log(listEndpoints(app));
 

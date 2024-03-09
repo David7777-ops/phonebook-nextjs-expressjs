@@ -1,0 +1,144 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "phonebook-server",
+		"version": "0.0.1",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Omar Adel",
+			"email": "omarxadel21@gmail.com"
+		}
+	},
+	"paths": {
+		"/auth/logout": {
+			"post": {
+				"operationId": "Logout",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/auth/signUp": {
+			"post": {
+				"operationId": "SignUp",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/contacts/{id}": {
+			"delete": {
+				"operationId": "Delete",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contacts"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"put": {
+				"operationId": "Update",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contacts"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"get": {
+				"operationId": "FindOne",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contacts"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/contacts": {
+			"get": {
+				"operationId": "FindMany",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contacts"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "Create",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Contacts"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

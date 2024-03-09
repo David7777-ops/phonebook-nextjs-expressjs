@@ -2,7 +2,10 @@ import { Request, Response, Router } from "express";
 import { AuthService } from "../../services/auth/auth.service";
 import { validate } from "../../middlewares/zod";
 import { ILoginUser, ISignupUser } from "../../dto/auth.dto";
+import { Post, Route, Tags } from "tsoa";
 
+@Route("auth")
+@Tags("Auth")
 class AuthController {
   public routerHandler;
   private service = new AuthService();
@@ -13,6 +16,7 @@ class AuthController {
     this.logout();
   }
 
+  @Post("/logout")
   logout() {
     this.routerHandler.post(
       "/auth/logout",
@@ -25,6 +29,7 @@ class AuthController {
     );
   }
 
+  @Post("/login")
   login() {
     this.routerHandler.post(
       "/auth/login",
@@ -48,6 +53,7 @@ class AuthController {
     );
   }
 
+  @Post("/signUp")
   signUp() {
     this.routerHandler.post(
       "/auth/signUp",
