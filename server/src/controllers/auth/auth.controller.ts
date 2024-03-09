@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
-import { AuthService } from "../services/auth/auth.service";
-import { validate } from "../middlewares/zod";
-import { ILoginUser, ISignupUser } from "../dto/auth.dto";
+import { AuthService } from "../../services/auth/auth.service";
+import { validate } from "../../middlewares/zod";
+import { ILoginUser, ISignupUser } from "../../dto/auth.dto";
 
 class AuthController {
   public routerHandler;
