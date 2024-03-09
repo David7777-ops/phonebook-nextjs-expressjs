@@ -11,7 +11,7 @@ const Page = () => {
     console.log("here", file.name);
   };
   return (
-    <div className="flex justify-center items-center py-24 px-44 bg-background min-h-screen w-full">
+    <div className="flex justify-center items-center py-24 px-44 min-h-screen w-full">
       <div className="flex flex-1">
         <ImageUploadButton handleFile={handleFile} />
       </div>

@@ -4,7 +4,7 @@ import { Label } from "@/components/label";
 
 export default function Page() {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen w-full bg-background">
+    <div className="flex flex-col justify-center items-center min-h-screen w-full">
       <div className="flex flex-col justify-center items-center bg-white px-16 w-[1095px]">
         <h1 className="font-semibold text-[40px] mt-10 mb-28">
           Create My Account
