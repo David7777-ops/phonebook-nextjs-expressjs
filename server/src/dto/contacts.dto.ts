@@ -9,3 +9,15 @@ export const ICreateContact = z
     email: z.string().email().optional(),
   })
   .strict();
+
+export const IUpdateContact = z
+  .object({
+    name: z.string().optional(),
+    phoneNumber: z
+      .string()
+      .regex(PHONE_REGEX, "Invalid Phone Number")
+      .optional(),
+    image: z.string().optional(),
+    email: z.string().email().optional(),
+  })
+  .strict();

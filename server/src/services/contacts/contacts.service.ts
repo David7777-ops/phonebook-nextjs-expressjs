@@ -5,7 +5,7 @@ class ContactsServie {
   async create({ data }: Prisma.ContactCreateArgs) {
     return await prisma.contact.create({ data });
   }
-  async findUserClients({
+  async findUserContacts({
     filters,
     pagination,
   }: {
@@ -26,6 +26,25 @@ class ContactsServie {
       },
       take: limit,
       skip: offset,
+    });
+  }
+  async update({
+    filters,
+    data,
+  }: {
+    filters: {
+      uid: string;
+      cid: string;
+    };
+    data: Prisma.ContactUncheckedUpdateInput;
+  }) {
+    const { uid, cid } = filters;
+    return await prisma.contact.update({
+      where: {
+        uid,
+        id: cid,
+      },
+      data,
     });
   }
 }

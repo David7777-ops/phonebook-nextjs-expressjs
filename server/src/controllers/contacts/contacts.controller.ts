@@ -1,7 +1,7 @@
 import { Response, Router } from "express";
 import ContactsServie from "../../services/contacts/contacts.service";
 import { validate } from "../../middlewares/zod";
-import { ICreateContact } from "../../dto/contacts.dto";
+import { ICreateContact, IUpdateContact } from "../../dto/contacts.dto";
 import { IGetUserAuthInfoRequest, authorization } from "../../middlewares/auth";
 
 class ContactsController {
@@ -11,6 +11,32 @@ class ContactsController {
     this.routerHandler = Router();
     this.create();
     this.findMany();
+    this.update();
+  }
+
+  async update() {
+    this.routerHandler.put(
+      "/contacts/:id",
+      authorization,
+      validate(IUpdateContact),
+      async (req: IGetUserAuthInfoRequest, res: Response) => {
+        const { ...data } = req.body;
+        const cid = req.params.id;
+        try {
+          const contact = await this.service.update({
+            filters: {
+              uid: req.user.id,
+              cid,
+            },
+            data,
+          });
+          res.send(contact);
+        } catch (error: any) {
+          console.log(error);
+          res.sendStatus(400);
+        }
+      }
+    );
   }
 
   async findMany() {
@@ -25,7 +51,7 @@ class ContactsController {
           if (req.query.page) page = +req.query.page;
         }
         try {
-          const contacts = await this.service.findUserClients({
+          const contacts = await this.service.findUserContacts({
             filters: {
               uid: req.user.id,
             },
