@@ -10,8 +10,38 @@ class ContactsController {
   constructor() {
     this.routerHandler = Router();
     this.create();
+    this.findMany();
   }
 
+  async findMany() {
+    this.routerHandler.get(
+      "/contacts",
+      authorization,
+      async (req: IGetUserAuthInfoRequest, res: Response) => {
+        let limit = 10;
+        let page = 1;
+        if (req.query) {
+          if (req.query.limit) limit = +req.query.limit;
+          if (req.query.page) page = +req.query.page;
+        }
+        try {
+          const contacts = await this.service.findUserClients({
+            filters: {
+              uid: req.user.id,
+            },
+            pagination: {
+              limit,
+              page,
+            },
+          });
+          res.send(contacts);
+        } catch (error: any) {
+          console.log(error);
+          res.sendStatus(400);
+        }
+      }
+    );
+  }
   async create() {
     this.routerHandler.post(
       "/contacts",
