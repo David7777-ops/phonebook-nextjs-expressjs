@@ -5,6 +5,7 @@ import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import { Server } from "http";
 import routes from "../routes";
+import bodyParser from "body-parser";
 
 function initExpress(): Server {
   const app = express();
@@ -13,6 +14,7 @@ function initExpress(): Server {
   app.use(cors());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
   // Logger
   app.use(morgan("dev"));
