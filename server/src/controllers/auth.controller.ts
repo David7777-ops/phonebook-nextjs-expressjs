@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { AuthService } from "../services/auth/auth.service";
 import { validate } from "../middlewares/zod";
-import { ISignupUser } from "../dto/auth.dto";
+import { ILoginUser, ISignupUser } from "../dto/auth.dto";
 
 class AuthController {
   public routerHandler;
@@ -9,6 +9,43 @@ class AuthController {
   constructor() {
     this.routerHandler = Router();
     this.signUp();
+    this.login();
+    this.logout();
+  }
+
+  logout() {
+    this.routerHandler.post(
+      "/auth/logout",
+      async (req: Request, res: Response) => {
+        res.cookie("jwt", "", { maxAge: 0 });
+        res.status(200).send({
+          message: "Success",
+        });
+      }
+    );
+  }
+
+  login() {
+    this.routerHandler.post(
+      "/auth/login",
+      validate(ILoginUser),
+      async (req: Request, res: Response) => {
+        try {
+          const token = await this.service.login(req.body);
+          res.cookie("jwt", token, {
+            maxAge: 24 * 60 * 60 * 1000, // 1d
+            httpOnly: true,
+            secure: true,
+          });
+          res.status(200).send({
+            message: "Success",
+          });
+        } catch (error: any) {
+          console.error(error);
+          res.status(401).send(error.message);
+        }
+      }
+    );
   }
 
   signUp() {
@@ -21,7 +58,7 @@ class AuthController {
           res.send(newUser);
         } catch (error) {
           console.error(error);
-          res.status(400).send(error);
+          res.status(401).send(error);
         }
       }
     );

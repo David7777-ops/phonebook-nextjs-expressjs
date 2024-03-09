@@ -5,16 +5,20 @@ import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import { Server } from "http";
 import routes from "../routes";
-import bodyParser from "body-parser";
 
 function initExpress(): Server {
   const app = express();
 
   // Middleware
-  app.use(cors());
+  app.use(
+    cors({
+      credentials: true,
+      // origin: "http://localhost:3000",
+    })
+  );
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(urlencoded({ extended: false }));
-  app.use(bodyParser.json());
+  app.use(express.json());
 
   // Logger
   app.use(morgan("dev"));
