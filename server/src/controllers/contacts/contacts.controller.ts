@@ -12,6 +12,7 @@ class ContactsController {
     this.create();
     this.findMany();
     this.update();
+    this.findOne();
   }
 
   async update() {
@@ -29,6 +30,28 @@ class ContactsController {
               cid,
             },
             data,
+          });
+          res.send(contact);
+        } catch (error: any) {
+          console.log(error);
+          res.sendStatus(400);
+        }
+      }
+    );
+  }
+
+  async findOne() {
+    this.routerHandler.get(
+      "/contacts/:id",
+      authorization,
+      async (req: IGetUserAuthInfoRequest, res: Response) => {
+        const cid = req.params.id;
+        try {
+          const contact = await this.service.findUnique({
+            filters: {
+              uid: req.user.id,
+              cid,
+            },
           });
           res.send(contact);
         } catch (error: any) {

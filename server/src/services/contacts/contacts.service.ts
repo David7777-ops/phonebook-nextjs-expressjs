@@ -47,6 +47,23 @@ class ContactsServie {
       data,
     });
   }
+
+  async findUnique({
+    filters,
+  }: {
+    filters: {
+      uid: string;
+      cid: string;
+    };
+  }) {
+    const { uid, cid } = filters;
+    return await prisma.contact.findUnique({
+      where: {
+        uid,
+        id: cid,
+      },
+    });
+  }
 }
 
 export default ContactsServie;
