@@ -18,7 +18,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={classNames("min-h-screen", inter.className)}>
+      <body
+        className={classNames("min-h-screen bg-background", inter.className)}
+      >
         <main className="min-h-screen">{children}</main>
       </body>
     </html>
