@@ -57,7 +57,7 @@ class ContactsServie {
     };
   }) {
     const { uid, cid } = filters;
-    return await prisma.contact.findUnique({
+    return await prisma.contact.findUniqueOrThrow({
       where: {
         uid,
         id: cid,

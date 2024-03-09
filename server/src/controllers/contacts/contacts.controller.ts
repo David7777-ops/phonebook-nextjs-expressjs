@@ -1,8 +1,9 @@
-import { Response, Router } from "express";
+import { NextFunction, Response, Router } from "express";
 import ContactsServie from "../../services/contacts/contacts.service";
 import { validate } from "../../middlewares/zod";
 import { ICreateContact, IUpdateContact } from "../../dto/contacts.dto";
 import { IGetUserAuthInfoRequest, authorization } from "../../middlewares/auth";
+import errorHandler from "../../middlewares/errors";
 
 class ContactsController {
   public routerHandler;
@@ -20,7 +21,11 @@ class ContactsController {
     this.routerHandler.delete(
       "/contacts/:id",
       authorization,
-      async (req: IGetUserAuthInfoRequest, res: Response) => {
+      async (
+        req: IGetUserAuthInfoRequest,
+        res: Response,
+        next: NextFunction
+      ) => {
         const cid = req.params.id;
         try {
           const contact = await this.service.delete({
@@ -31,10 +36,10 @@ class ContactsController {
           });
           res.send(contact);
         } catch (error: any) {
-          console.log(error);
-          res.sendStatus(400);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
 
@@ -43,7 +48,11 @@ class ContactsController {
       "/contacts/:id",
       authorization,
       validate(IUpdateContact),
-      async (req: IGetUserAuthInfoRequest, res: Response) => {
+      async (
+        req: IGetUserAuthInfoRequest,
+        res: Response,
+        next: NextFunction
+      ) => {
         const { ...data } = req.body;
         const cid = req.params.id;
         try {
@@ -56,10 +65,10 @@ class ContactsController {
           });
           res.send(contact);
         } catch (error: any) {
-          console.log(error);
-          res.sendStatus(400);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
 
@@ -67,7 +76,11 @@ class ContactsController {
     this.routerHandler.get(
       "/contacts/:id",
       authorization,
-      async (req: IGetUserAuthInfoRequest, res: Response) => {
+      async (
+        req: IGetUserAuthInfoRequest,
+        res: Response,
+        next: NextFunction
+      ) => {
         const cid = req.params.id;
         try {
           const contact = await this.service.findUnique({
@@ -78,10 +91,10 @@ class ContactsController {
           });
           res.send(contact);
         } catch (error: any) {
-          console.log(error);
-          res.sendStatus(400);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
 
@@ -89,7 +102,11 @@ class ContactsController {
     this.routerHandler.get(
       "/contacts",
       authorization,
-      async (req: IGetUserAuthInfoRequest, res: Response) => {
+      async (
+        req: IGetUserAuthInfoRequest,
+        res: Response,
+        next: NextFunction
+      ) => {
         let limit = 10;
         let page = 1;
         if (req.query) {
@@ -108,10 +125,10 @@ class ContactsController {
           });
           res.send(contacts);
         } catch (error: any) {
-          console.log(error);
-          res.sendStatus(400);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
   async create() {
@@ -119,7 +136,11 @@ class ContactsController {
       "/contacts",
       authorization,
       validate(ICreateContact),
-      async (req: IGetUserAuthInfoRequest, res: Response) => {
+      async (
+        req: IGetUserAuthInfoRequest,
+        res: Response,
+        next: NextFunction
+      ) => {
         try {
           const newContact = await this.service.create({
             data: {
@@ -129,9 +150,10 @@ class ContactsController {
           });
           res.send(newContact);
         } catch (error: any) {
-          res.status(400).send(error);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
 }
