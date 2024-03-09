@@ -64,6 +64,23 @@ class ContactsServie {
       },
     });
   }
+
+  async delete({
+    filters,
+  }: {
+    filters: {
+      uid: string;
+      cid: string;
+    };
+  }) {
+    const { uid, cid } = filters;
+    return await prisma.contact.delete({
+      where: {
+        uid,
+        id: cid,
+      },
+    });
+  }
 }
 
 export default ContactsServie;

@@ -13,6 +13,29 @@ class ContactsController {
     this.findMany();
     this.update();
     this.findOne();
+    this.delete();
+  }
+
+  async delete() {
+    this.routerHandler.delete(
+      "/contacts/:id",
+      authorization,
+      async (req: IGetUserAuthInfoRequest, res: Response) => {
+        const cid = req.params.id;
+        try {
+          const contact = await this.service.delete({
+            filters: {
+              uid: req.user.id,
+              cid,
+            },
+          });
+          res.send(contact);
+        } catch (error: any) {
+          console.log(error);
+          res.sendStatus(400);
+        }
+      }
+    );
   }
 
   async update() {
