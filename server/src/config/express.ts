@@ -5,6 +5,7 @@ import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import { Server } from "http";
 import routes from "../routes";
+import cookieParser from "cookie-parser";
 
 function initExpress(): Server {
   const app = express();
@@ -19,6 +20,7 @@ function initExpress(): Server {
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(urlencoded({ extended: false }));
   app.use(express.json());
+  app.use(cookieParser());
 
   // Logger
   app.use(morgan("dev"));
