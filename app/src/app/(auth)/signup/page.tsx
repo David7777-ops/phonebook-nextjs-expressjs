@@ -42,7 +42,7 @@ export default function Page() {
           privacy policy.
         </p>
         <div className="flex gap-1.5 mt-5 mb-4">
-          <p className="text-[16px]">Already have an account?</p>
+          <p className="text-[16px] text-black/70">Already have an account?</p>
           <a className="underline font-medium" href="/login">
             Sign In
           </a>
