@@ -1,41 +1,86 @@
+"use client";
+
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { Label } from "@/components/label";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ErrorParagraph } from "@/components/error-paragraph";
+import { SignUp, signUpSchema } from "@/lib/data/schemas/auth";
 
 export default function Page() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUp>({
+    resolver: zodResolver(signUpSchema),
+  });
+  const onSubmit: SubmitHandler<SignUp> = async (_data) => {
+    console.log(_data);
+  };
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full">
       <div className="flex flex-col justify-center items-center bg-white px-16 w-[1095px]">
         <h1 className="font-semibold text-[40px] mt-10 mb-28">
           Create My Account
         </h1>
-        <div className="flex gap-10 w-full">
+        <form
+          id="signup"
+          onSubmit={handleSubmit((data) => onSubmit(data))}
+          className="flex gap-10 w-full"
+        >
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
               <Label htmlFor="name">Full Name:</Label>
-              <Input id="name" placeholder="John Doe" type="text" />
+              <Input
+                id="name"
+                placeholder="John Doe"
+                type="text"
+                {...register("name")}
+              />
+              <ErrorParagraph>{errors.name?.message}</ErrorParagraph>
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="email">Email:</Label>
-              <Input id="email" placeholder="example@email.com" type="email" />
+              <Input
+                id="email"
+                placeholder="example@email.com"
+                type="email"
+                {...register("email")}
+              />
+              <ErrorParagraph>{errors.email?.message}</ErrorParagraph>
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="phone">Number:</Label>
-              <Input id="phone" placeholder="+1(123)456-789" />
+              <Input
+                id="phone"
+                placeholder="+1(123)456-789"
+                {...register("phoneNumber")}
+              />
+              <ErrorParagraph>{errors.phoneNumber?.message}</ErrorParagraph>
             </div>
           </div>
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
               <Label htmlFor="password">Password:</Label>
-              <Input id="password" type="password" />
+              <Input id="password" type="password" {...register("password")} />
+              <ErrorParagraph>{errors.password?.message}</ErrorParagraph>
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="repassword">Confirm Password:</Label>
-              <Input id="repassword" type="password" />
+              <Label htmlFor="confirmPassword">Confirm Password:</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                {...register("confirmPassword")}
+              />
+              <ErrorParagraph>{errors.confirmPassword?.message}</ErrorParagraph>
             </div>
           </div>
-        </div>
-        <Button className="mt-[40px]">Sign Me Up</Button>
+        </form>
+        <Button className="mt-[40px]" form="signup" type="submit">
+          Sign Me Up
+        </Button>
         <p className="mt-5 text-sm text-black/50">
           By contiuing you accept our{" "}
           <span className="underline">terms and conditions</span> and our
