@@ -7,8 +7,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorParagraph } from "@/components/error-paragraph";
 import { SignUp, signUpSchema } from "@/lib/data/schemas/auth";
+import { signUp } from "@/lib/data/controllers/auth.controller";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Page() {
+  const [credentialsError, setCredentialsError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +23,10 @@ export default function Page() {
     resolver: zodResolver(signUpSchema),
   });
   const onSubmit: SubmitHandler<SignUp> = async (_data) => {
-    console.log(_data);
+    setLoading(true);
+    const response = await signUp(_data);
+    setCredentialsError(response);
+    setLoading(false);
   };
   return (
     <div className="flex flex-col justify-center items-center min-h-screen w-full">
@@ -78,9 +87,16 @@ export default function Page() {
             </div>
           </div>
         </form>
-        <Button className="mt-[40px]" form="signup" type="submit">
+        <Button
+          className="mt-[40px]"
+          form="signup"
+          type="submit"
+          disabled={loading}
+        >
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Sign Me Up
         </Button>
+        <ErrorParagraph>{credentialsError}</ErrorParagraph>
         <p className="mt-5 text-sm text-black/50">
           By contiuing you accept our{" "}
           <span className="underline">terms and conditions</span> and our

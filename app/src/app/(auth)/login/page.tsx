@@ -7,8 +7,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorParagraph } from "@/components/error-paragraph";
 import { Login, loginSchema } from "@/lib/data/schemas/auth";
+import { login } from "@/lib/data/controllers/auth.controller";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 export default function Page() {
+  const [credentialsError, setCredentialsError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -17,7 +23,10 @@ export default function Page() {
     resolver: zodResolver(loginSchema),
   });
   const onSubmit: SubmitHandler<Login> = async (_data) => {
-    console.log(_data);
+    setLoading(true);
+    const error = await login(_data);
+    setCredentialsError(error);
+    setLoading(false);
   };
 
   return (
@@ -50,9 +59,16 @@ export default function Page() {
             </div>
           </div>
         </form>
-        <Button className="mt-[50px] w-[307px]" form="login" type="submit">
+        <Button
+          className="mt-[50px] w-[307px] flex gap-2"
+          form="login"
+          type="submit"
+          disabled={loading}
+        >
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Sign In
         </Button>
+        <ErrorParagraph>{credentialsError}</ErrorParagraph>
         <div className="flex gap-1.5 mt-[90px] mb-4">
           <p className="text-[16px] text-black/70">Don’t have an account?</p>
           <a className="underline font-medium" href="/signup">
