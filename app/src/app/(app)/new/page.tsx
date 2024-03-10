@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/label";
 import { Input } from "@/components/input";
 import { ImageUploadButton } from "@/components/image-upload-button";
@@ -9,6 +9,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ErrorParagraph } from "@/components/error-paragraph";
 import { Contact, contactSchema } from "@/lib/data/schemas/contact";
+import { createContact } from "@/lib/data/controllers/contacts.controller";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const {
@@ -19,11 +21,22 @@ const Page = () => {
     resolver: zodResolver(contactSchema),
   });
 
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const handleFile = (file: File) => {
     console.log("here", file.name);
   };
   const onSubmit: SubmitHandler<Contact> = async (_data) => {
-    console.log(_data);
+    setLoading(true);
+    const res = await createContact(_data);
+    if (res.success) {
+      router.push("/");
+    } else {
+      setError(res.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -36,11 +49,14 @@ const Page = () => {
       </div>
       <div className="flex flex-col flex-1 relative">
         <div className="flex self-end">
-          <Button variant="ghost" size="lg" type="submit">
+          <ErrorParagraph>{error}</ErrorParagraph>
+          <Button variant="ghost" size="lg" type="submit" disabled={loading}>
             <Check className="w-8 h-8" />
           </Button>
           <Button variant="ghost" size="lg" type="button">
-            <X className="w-8 h-8" />
+            <a href="/">
+              <X className="w-8 h-8" />
+            </a>
           </Button>
         </div>
         <div className="flex flex-col gap-14">
