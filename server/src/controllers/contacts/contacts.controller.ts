@@ -5,6 +5,7 @@ import { ICreateContact, IUpdateContact } from "../../dto/contacts.dto";
 import { IGetUserAuthInfoRequest, authorization } from "../../middlewares/auth";
 import errorHandler from "../../middlewares/errors";
 import { Post, Get, Put, Delete, Route, Tags } from "tsoa";
+import { BASE_SUCCESS_OBJECT } from "../../config/constants";
 
 @Route("/contacts")
 @Tags("Contacts")
@@ -38,7 +39,7 @@ class ContactsController {
               cid,
             },
           });
-          res.send(contact);
+          res.send({ ...BASE_SUCCESS_OBJECT, results: contact });
         } catch (error: any) {
           next(error);
         }
@@ -68,7 +69,7 @@ class ContactsController {
             },
             data,
           });
-          res.send(contact);
+          res.send({ ...BASE_SUCCESS_OBJECT, results: contact });
         } catch (error: any) {
           next(error);
         }
@@ -130,7 +131,11 @@ class ContactsController {
               page,
             },
           });
-          res.send(contacts);
+          res.send({
+            ...BASE_SUCCESS_OBJECT,
+            results: contacts,
+            pagination: {},
+          });
         } catch (error: any) {
           next(error);
         }
@@ -157,7 +162,7 @@ class ContactsController {
               uid: req.user.id,
             },
           });
-          res.send(newContact);
+          res.send({ ...BASE_SUCCESS_OBJECT, results: newContact });
         } catch (error: any) {
           next(error);
         }

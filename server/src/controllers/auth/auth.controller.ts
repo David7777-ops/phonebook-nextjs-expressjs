@@ -1,8 +1,9 @@
-import { Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { AuthService } from "../../services/auth/auth.service";
 import { validate } from "../../middlewares/zod";
 import { ILoginUser, ISignupUser } from "../../dto/auth.dto";
 import { Post, Route, Tags } from "tsoa";
+import errorHandler from "../../middlewares/errors";
 
 @Route("auth")
 @Tags("Auth")
@@ -37,17 +38,19 @@ class AuthController {
       async (req: Request, res: Response) => {
         try {
           const token = await this.service.login(req.body);
-          res.cookie("jwt", token, {
-            maxAge: 24 * 60 * 60 * 1000, // 1d
-            httpOnly: true,
-            secure: true,
+          res.cookie("accessToken", token, {
+            maxAge: 24 * 60 * 60 * 1000,
+            sameSite: false,
           });
           res.status(200).send({
             message: "Success",
+            success: true,
+            accessToken: token,
+            refreshToken: token,
           });
         } catch (error: any) {
           console.error(error);
-          res.status(401).send(error.message);
+          res.status(401).send("Invalid Credentials");
         }
       }
     );
@@ -58,15 +61,21 @@ class AuthController {
     this.routerHandler.post(
       "/auth/signUp",
       validate(ISignupUser),
-      async (req: Request, res: Response) => {
+      async (req: Request, res: Response, next: NextFunction) => {
         try {
           const newUser = await this.service.signUp(req.body);
-          res.send(newUser);
+          res.send({
+            message: "Success",
+            success: true,
+            result: {
+              ...newUser,
+            },
+          });
         } catch (error) {
-          console.error(error);
-          res.status(401).send(error);
+          next(error);
         }
-      }
+      },
+      errorHandler
     );
   }
 }

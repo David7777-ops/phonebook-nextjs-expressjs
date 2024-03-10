@@ -11,15 +11,19 @@ export const authorization = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies.jwt;
+  const token = req.cookies.accessToken;
   if (!token) {
-    return res.sendStatus(403);
+    return res.status(403).send({
+      message: "Forbidden",
+    });
   }
   try {
     const data = jwt.verify(token, vars.auth.jwt.secret);
     req.user = data;
     return next();
   } catch {
-    return res.sendStatus(403);
+    return res.status(403).send({
+      message: "Forbidden",
+    });
   }
 };
