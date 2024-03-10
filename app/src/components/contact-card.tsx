@@ -7,7 +7,7 @@ export const ContactCard = ({ contact }: { contact: Contact }) => {
   return (
     <div className="relative border-2 border-[#777777] group">
       <div className="absolute top-4 right-4 flex gap-2 group-hover:opacity-100 opacity-0 transition-all">
-        <a href="/edit">
+        <a href={`/edit/${contact.id}`}>
           <Edit className="text-white" />
         </a>
         <button>

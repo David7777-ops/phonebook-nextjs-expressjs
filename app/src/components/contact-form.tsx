@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Label } from "@/components/label";
 import { Input } from "@/components/input";
 import { ImageUploadButton } from "@/components/image-upload-button";
@@ -15,8 +15,18 @@ export const ContactForm = ({
 }) => {
   const {
     register,
+    reset,
     formState: { errors },
   } = useFormContext<Contact>();
+
+  useEffect(() => {
+    reset({
+      email: contact?.email,
+      name: contact?.name,
+      phoneNumber: contact?.phoneNumber,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contact]);
 
   const handleFile = (file: File) => {
     console.log("here", file.name);

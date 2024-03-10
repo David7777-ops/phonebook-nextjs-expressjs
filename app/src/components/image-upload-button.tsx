@@ -21,7 +21,7 @@ export const ImageUploadButton = ({
   };
   return (
     <>
-      <button className="relative group" onClick={handleClick}>
+      <button className="relative group" onClick={handleClick} type="button">
         <p className="group-hover:opacity-100 transition-all delay-75 ease-in-out absolute text-white top-16 left-[134px] text-left text-4xl font-semibold opacity-0">
           Add Photo
         </p>
