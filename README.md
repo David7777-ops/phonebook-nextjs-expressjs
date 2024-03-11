@@ -2,6 +2,14 @@
 
 Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and PostgreSQL for database, and NextJS with Tailwind for the frontend.🚀
 
+> ⚠ Hint: To ensure the best experience, you can login to the app via desktop 🖥 through this link: [https://phonebook-app-omarxadel.vercel.app/](https://phonebook-app-omarxadel.vercel.app/) with these credentials:
+
+| Email        | Password  |
+| :----------- | :-------: |
+| a@cultiv.com | a12345678 |
+
+> ⚠ Hint: The app might take a couple of trials (~ 1 min) to login at first. It is deployed to the free tier of [https://render.com](https://render.com) so it is taken down due to inactivity. 
+
 ---
 
 ## Structure
