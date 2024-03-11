@@ -1,4 +1,4 @@
-# Phonebook App Server
+# Phonebook Server App
 
 This server is made with love ♥ and also NodeJS, Express and TypeScript. I used pnpm for a package manager, so you will have to deal with its ease and greatness -instead of npm. Sorry for improving the quality of your life..
 
