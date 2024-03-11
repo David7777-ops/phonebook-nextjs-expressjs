@@ -48,6 +48,8 @@ The project is missing so much functionality, like skeletons for loading for exa
 
 The project is also not responsive; the provided design was only for desktop, so, you get it.
 
+Also, contacts pagination is not supported, probably after loading 10 contacts the logic will break.
+
 Feel free to go through the README.md for each of the directories to understand how to use. Thanks and good luck!
 
 ## TODO:
@@ -55,6 +57,7 @@ Feel free to go through the README.md for each of the directories to understand 
 - [ ] Move jwt validation to the backend
 - [ ] Add skeletons for loading state
 - [ ] Make the design responsive
+- [ ] Pagination
 
 ## Contributing
 
