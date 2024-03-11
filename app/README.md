@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Phonebook Client App
 
-## Getting Started
+This app is made with love ♥ and also NextJS, Tailwind and TypeScript. I used pnpm for a package manager, so you will have to deal with its ease and greatness -instead of npm. Sorry for improving the quality of your life..
 
-First, run the development server:
+## Usage
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+In order to be able to use this app, you will have to follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. `pnpm i`
+2. `touch .env` or create the `.env` file
+3. Add the values from `.env.example` file
+4. `pnpm dev`
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Hopefully this does it, if not, let me know.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Pages
 
-## Learn More
+| Endpoint  | Page         |
+| --------- | ------------ |
+| /         | Home         |
+| /login    | Login        |
+| /signup   | Sign Up      |
+| /new      | New Contact  |
+| /edit/:id | Edit Contact |
 
-To learn more about Next.js, take a look at the following resources:
+## Error Handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I did my best with the given time for error handling. I display the common errors with friendly messages, however, I did not go crazy with error messages, some of them are not the frindliest.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Validation Note
 
-## Deploy on Vercel
+You will find in the .env for this project the JWT_SECRET, it's the same from the backend. I know it's not the best approach to verify JWT tokens in the frontend, I did it for simplicity given the scope and the time.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Contact
+
+Omar Adel - [@omarxadel](https://twitter.com/omarxadel) - omarxadel21@gmail.com
+
+Project Link: [https://github.com/omarxadel/phonebook-app](https://github.com/omarxadel/phonebook-app)
