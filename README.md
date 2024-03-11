@@ -8,7 +8,7 @@ Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and Post
 | :----------- | :-------: |
 | a@cultiv.com | a12345678 |
 
-> ⚠ Hint: The app might take a couple of trials (~ 1 min) to login at first. It is deployed to the free tier of [https://render.com](https://render.com) so it is taken down due to inactivity. 
+> ⚠ Hint: The app might take a couple of trials (~ 1 min) to login at first. It is deployed to the free tier of [https://render.com](https://render.com) so it is taken down due to inactivity.
 
 ---
 
@@ -52,7 +52,7 @@ Feel free to go through the README.md for each of the directories to understand 
 
 ## TODO:
 
-- [ ] Move jwt validation to the backend
+- [x] Move jwt validation to the backend
 - [ ] Add skeletons for loading state
 - [ ] Make the design responsive
 

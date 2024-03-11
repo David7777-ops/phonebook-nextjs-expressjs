@@ -21,6 +21,21 @@
 		}
 	},
 	"paths": {
+		"/auth/verifyToken": {
+			"get": {
+				"operationId": "VerifyToken",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
 		"/auth/logout": {
 			"post": {
 				"operationId": "Logout",

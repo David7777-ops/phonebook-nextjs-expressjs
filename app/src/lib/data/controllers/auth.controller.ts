@@ -2,6 +2,7 @@
 
 import { API_URL, BASE_URL } from "@/lib/config/constants";
 import { Login, SignUp } from "@/lib/data/schemas/auth";
+import { serialize } from "cookie";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -17,7 +18,6 @@ export async function login({ email, password }: Login) {
   const resJson = await response.json();
   if (resJson.success) {
     cookies().set("accessToken", resJson.accessToken);
-    cookies().set("refreshToken", resJson.refreshToken);
     redirect("/");
   } else {
     return "Invalid Credentials";
@@ -40,5 +40,23 @@ export async function signUp({ email, password, name, phoneNumber }: SignUp) {
   } else {
     if (resJson.status === 409) return "Email already registered";
     else return "Something went wrong";
+  }
+}
+
+export async function jwtVerify(token: string) {
+  const response = await fetch(API_URL.concat("/auth/verifyToken"), {
+    method: "GET",
+    headers: {
+      Cookie: serialize(
+        "accessToken",
+        cookies().get("accessToken")?.value || ""
+      ),
+    },
+  });
+  const resJson = await response.json();
+  if (resJson.success) {
+    return true;
+  } else {
+    return false;
   }
 }
