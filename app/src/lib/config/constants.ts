@@ -12,8 +12,7 @@ export const BASE_URL = isDev
 export const API_URL = isDev
   ? "http://localhost:8080/api"
   : // TODO: Update on deploy
-    "http://localhost:8080";
-
+    "https://phonebook-app-czdu.onrender.com/api";
 export const STORAGE_URL = ({
   fileName,
   folderName,
