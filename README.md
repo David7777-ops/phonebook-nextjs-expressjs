@@ -2,6 +2,18 @@
 
 Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and PostgreSQL for database, and NextJS with Tailwind for the frontend.🚀
 
+
+<a href="https://www.typescriptlang.org/community" target="_blank"><img align="left" alt="TS" width="26px" src="https://iconape.com/wp-content/png_logo_vector/typescript.png" /></a>
+<a href="https://nextjs.org/" target="_blank"><img align="left" alt="Next" width="26px" src="https://miro.medium.com/v2/resize:fit:1258/1*okiCUvTUJLtOqJv1dMzwpA.png" /></a>
+<a href="https://tailwindcss.com/" target="_blank"><img align="left" alt="Tailwind" width="26px" src="https://adware-technologies.s3.amazonaws.com/uploads/technology/thumbnail/31/tailwind.png" /></a>
+<a href="https://expressjs.com/" target="_blank"><img align="left" alt="Express" width="26px" src="https://w7.pngwing.com/pngs/925/447/png-transparent-express-js-node-js-javascript-mongodb-node-js-text-trademark-logo.png" /></a>
+<a href="https://www.prisma.io/" target="_blank"><img align="left" alt="Prisma" width="26px" src="https://cdn-1.webcatalog.io/catalog/prisma-data-platform/prisma-data-platform-icon-filled-256.png?v=1675593236933" /></a>
+<a href="https://www.postgresql.org/" target="_blank"><img align="left" alt="PSQL" width="26px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/993px-Postgresql_elephant.svg.png" /></a>
+<a href="https://supabase.com/" target="_blank"><img align="left" alt="supa" width="26px" src="https://miro.medium.com/v2/resize:fit:1358/0*QzPzYLTNRX7p5Rsl" /></a>
+<br/>
+
+---
+
 > ⚠ Hint: To ensure the best experience, you can login to the app via desktop 🖥 through this link: [https://phonebook-app-omarxadel.vercel.app/](https://phonebook-app-omarxadel.vercel.app/) with these credentials:
 
 | Email        | Password  |
@@ -18,6 +30,8 @@ Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and Post
 | :--------------- | :------------------: |
 | [app](app)       |      NextJS App      |
 | [server](server) | NodeJS (Express) API |
+
+This project is deployed on Vercel (NextJS App) and Render (NodeJS Express API). The database I'm using is PostgreSQL and is hosted on Supabase, alongside the storage.
 
 ## Branches
 
