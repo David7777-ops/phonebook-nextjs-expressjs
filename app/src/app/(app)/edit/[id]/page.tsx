@@ -14,6 +14,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { ContactForm } from "@/components/contact-form";
 import { useContact } from "@/lib/data/hooks/contacts";
+import { uploadContactImage } from "@/lib/data/controllers/storage.controller";
 
 const Page = () => {
   const pathnameArr = usePathname().split("/");
@@ -26,10 +27,23 @@ const Page = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [file, setFile] = useState<File | undefined>();
 
   const onSubmit: SubmitHandler<Contact> = async (_data) => {
     setLoading(true);
-    const res = await updateContact({ id, data: _data });
+    let image = "";
+    let fileName = "";
+    if (file) {
+      fileName = `${Date.now()}.webp`;
+      image = await uploadContactImage({ file, fileName });
+    }
+    const res = await updateContact({
+      id,
+      data: {
+        ..._data,
+        image: file ? image : _data.image,
+      },
+    });
     if (res.success) {
       router.push("/");
     } else {
@@ -40,7 +54,7 @@ const Page = () => {
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <FormProvider {...methods}>
-        <ContactForm contact={contact}>
+        <ContactForm file={file} setFile={setFile} contact={contact}>
           <div className="flex self-end">
             <ErrorParagraph>{error}</ErrorParagraph>
             <Button variant="ghost" size="lg" type="submit" disabled={loading}>

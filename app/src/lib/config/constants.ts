@@ -13,3 +13,14 @@ export const API_URL = isDev
   ? "http://localhost:8080/api"
   : // TODO: Update on deploy
     "http://localhost:8080";
+
+export const STORAGE_URL = ({
+  fileName,
+  folderName,
+}: {
+  fileName: string;
+  folderName: string;
+}) =>
+  "https://riusiblhrrxmzngdkzds.supabase.co/storage/v1/object/public/contacts" +
+  `/${folderName}` +
+  `/${fileName}`;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "@/components/label";
 import { Input } from "@/components/input";
 import { ImageUploadButton } from "@/components/image-upload-button";
@@ -9,9 +9,13 @@ import { Contact } from "@/lib/data/schemas/contact";
 export const ContactForm = ({
   children,
   contact,
+  file,
+  setFile,
 }: {
   children?: React.ReactNode;
   contact?: Contact;
+  file?: File;
+  setFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }) => {
   const {
     register,
@@ -24,18 +28,24 @@ export const ContactForm = ({
       email: contact?.email,
       name: contact?.name,
       phoneNumber: contact?.phoneNumber,
+      image: contact?.image,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contact]);
 
-  const handleFile = (file: File) => {
-    console.log("here", file.name);
+  const handleFile = (file: File | undefined) => {
+    if (file) {
+      setFile(file);
+    } else {
+      setFile(undefined);
+      reset({ image: "" });
+    }
   };
 
   return (
     <div className="flex justify-center items-center py-24 px-44 min-h-screen w-full">
       <div className="flex flex-1">
-        <ImageUploadButton handleFile={handleFile} />
+        <ImageUploadButton image={contact?.image} handleFile={handleFile} />
       </div>
       <div className="flex flex-col flex-1 relative">
         {children}

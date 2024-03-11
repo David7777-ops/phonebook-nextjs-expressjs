@@ -9,6 +9,10 @@ import { Contact, contactSchema } from "@/lib/data/schemas/contact";
 import { createContact } from "@/lib/data/controllers/contacts.controller";
 import { useRouter } from "next/navigation";
 import { ContactForm } from "@/components/contact-form";
+import {
+  deleteContactImage,
+  uploadContactImage,
+} from "@/lib/data/controllers/storage.controller";
 
 const Page = () => {
   const methods = useForm<Contact>({
@@ -18,14 +22,27 @@ const Page = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [file, setFile] = useState<File | undefined>();
 
   const onSubmit: SubmitHandler<Contact> = async (_data) => {
     setLoading(true);
-    const res = await createContact(_data);
+    let image = "";
+    let fileName = "";
+    if (file) {
+      fileName = `${Date.now()}.webp`;
+      image = await uploadContactImage({ file, fileName });
+    }
+    const res = await createContact({
+      ..._data,
+      image: image.length > 0 ? image : undefined,
+    });
     if (res.success) {
       router.push("/");
     } else {
       setError(res.message);
+      if (file) {
+        await deleteContactImage(fileName);
+      }
     }
     setLoading(false);
   };
@@ -33,7 +50,7 @@ const Page = () => {
   return (
     <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <FormProvider {...methods}>
-        <ContactForm>
+        <ContactForm file={file} setFile={setFile}>
           <div className="flex self-end">
             <ErrorParagraph>{error}</ErrorParagraph>
             <Button variant="ghost" size="lg" type="submit" disabled={loading}>

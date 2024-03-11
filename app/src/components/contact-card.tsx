@@ -32,11 +32,11 @@ export const ContactCard = ({ contact }: { contact: Contact }) => {
         </button>
       </div>
       <Image
-        src="/person.webp"
+        src={contact.image ? contact.image : "/person.webp"}
         width="250"
         height="300"
         alt="avatar"
-        className="border-b-2 border-[#777777]"
+        className="border-b-2 border-[#777777] w-[250px] h-[300px] object-cover image-center"
       />
       <div className="flex flex-col gap-1 p-1 justify-center items-center min-h-32">
         <p className="text-3xl font-semibold text-[#1E1E1E]">{contact?.name}</p>
