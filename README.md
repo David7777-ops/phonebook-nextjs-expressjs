@@ -1,6 +1,6 @@
 # Phonebook Full-Stack App
 
-Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and PostgreSQL for database, and NextJS with Tailwind for the frontend.🚀
+Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and PostgreSQL for database (hosted on Supabase, alongside storage), and NextJS with Tailwind for the frontend.🚀
 
 
 <a href="https://www.typescriptlang.org/community" target="_blank"><img align="left" alt="TS" width="26px" src="https://iconape.com/wp-content/png_logo_vector/typescript.png" /></a>
