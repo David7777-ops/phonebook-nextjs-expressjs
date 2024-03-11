@@ -9,7 +9,9 @@ In order to be able to use this app, you will have to follow these steps:
 1. `pnpm i`
 2. `touch .env` or create the `.env` file
 3. Add the values from `.env.example` file
-4. `pnpm dev`
+4. `pnpm dlx prisma generate`
+5. `pnpm dlx prisma db seed`
+6. `pnpm dev`
 
 Hopefully this does it, if not, let me know.
 
