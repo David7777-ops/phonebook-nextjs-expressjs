@@ -28,10 +28,6 @@ Hopefully this does it, if not, let me know.
 
 I did my best with the given time for error handling. I display the common errors with friendly messages, however, I did not go crazy with error messages, some of them are not the frindliest.
 
-## Validation Note
-
-You will find in the .env for this project the JWT_SECRET, it's the same from the backend. I know it's not the best approach to verify JWT tokens in the frontend, I did it for simplicity given the scope and the time.
-
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
