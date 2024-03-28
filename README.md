@@ -12,18 +12,6 @@ Phonebook full-stack web app using NodeJS (Express) with Prisma for ORM and Post
 <a href="https://supabase.com/" target="_blank"><img align="left" alt="supa" width="26px" src="https://miro.medium.com/v2/resize:fit:1358/0*QzPzYLTNRX7p5Rsl" /></a>
 <br/>
 
----
-
-> ⚠ Hint: To ensure the best experience, you can login to the app via desktop 🖥 through this link: [https://phonebook-app-omarxadel.vercel.app/](https://phonebook-app-omarxadel.vercel.app/) with these credentials:
-
-| Email        | Password  |
-| :----------- | :-------: |
-| a@cultiv.com | a12345678 |
-
-> ⚠ Hint: The app might take a couple of trials (~ 1 min) to login at first. It is deployed to the free tier of [https://render.com](https://render.com) so it is taken down due to inactivity.
-
----
-
 ## Structure
 
 | Codebase         |     Description      |
