@@ -1,0 +1,14 @@
+# frontend-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kutt-frontend-service
+  namespace: kutt
+spec:
+  selector:
+    app: kutt-frontend
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP

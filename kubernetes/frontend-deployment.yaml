@@ -1,0 +1,21 @@
+# frontend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kutt-frontend-deployment
+  namespace: kutt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kutt-frontend
+  template:
+    metadata:
+      labels:
+        app: kutt-frontend
+    spec:
+      containers:
+        - name: kutt-frontend
+          image: ton-registry/kutt-frontend:latest  # Remplace par ton image Docker
+          ports:
+            - containerPort: 3000

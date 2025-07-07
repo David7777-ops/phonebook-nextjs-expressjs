@@ -1,0 +1,25 @@
+# backend-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kutt-backend-deployment
+  namespace: kutt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kutt-backend
+  template:
+    metadata:
+      labels:
+        app: kutt-backend
+    spec:
+      containers:
+        - name: kutt-backend
+          image: ton-registry/kutt-backend:latest  # Remplace par ton image Docker
+          ports:
+            - containerPort: 3001
+          env:
+            - name: PORT
+              value: "3001"
+            # Ajoute ici les variables d’environnement de Kutt (Base de données, Redis, JWT, etc.)

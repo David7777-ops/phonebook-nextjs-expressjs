@@ -1,0 +1,54 @@
+# Fichiers d'environnement
+.env
+.env.*
+
+# Éditeurs & OS
+.vscode/
+.idea/
+**/.DS_Store
+
+# Node.js / NPM
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Next.js (si applicable au front un jour)
+client/.next/
+
+# Config locales sensibles
+client/config.js
+client/old.config.js
+server/config.js
+server/old.config.js
+
+# Docker
+*.log
+*.tar
+production-server
+
+# Redis
+dump.rdb
+
+# Docs générés
+docs/api/static
+
+# Logs
+logs
+
+# Base de données locale
+db/*
+!db/.gitkeep
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+crash.log
+.terraform.lock.hcl
+*.tfplan
+*.tfvars
+node_modules/
+
+# GitLab CI artifacts (optionnel si GitLab Runner local)
+coverage/
+*.zip

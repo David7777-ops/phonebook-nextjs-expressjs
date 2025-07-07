@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kutt-ingress
+  namespace: kutt
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/group.name: kutt
+spec:
+  ingressClassName: alb 
+  rules:
+    - host: davidlab77.site
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kutt-frontend-service
+                port:
+                  number: 3000
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: kutt-backend-service
+                port:
+                  number: 3001
+

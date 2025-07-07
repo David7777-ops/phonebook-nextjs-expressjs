@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kutt-config
+  namespace: kutt
+data:
+  REDIS_URL: redis://redis:6379
+  # Tu peux ajouter ici d'autres variables non sensibles
